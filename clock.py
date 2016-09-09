@@ -4,7 +4,8 @@ import sendgrid
 import os
 from sendgrid.helpers.mail import *
 
-sched = BlockingScheduler()
+sched = Scheduler()
+sched.start()
 
 def text_gen():
   
@@ -15,7 +16,6 @@ def text_gen():
   message = client.messages.create(to="+13479860720", from_="+16172022165", body="Hello Gen!")
   print('This job is run every two minutes.')
 
-@sched.scheduled_job('cron', day_of_week='thu', hour=9, minute=20)
 def send_email(recipient):
   sg = sendgrid.SendGridAPIClient(apikey=os.environ.get('SENDGRID_API_KEY'))
   from_email = Email("ohta.g@husky.neu.edu")
@@ -26,4 +26,4 @@ def send_email(recipient):
   mail = Mail(from_email, subject, to_email, content)
   response = sg.client.mail.send.post(request_body=mail.get())
 
-sched.start()
+sched.add_cron_job(send_email, day_of_week='fri', hour=7, minute=35)
