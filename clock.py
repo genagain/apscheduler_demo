@@ -26,4 +26,4 @@ def send_email(recipient):
   mail = Mail(from_email, subject, to_email, content)
   response = sg.client.mail.send.post(request_body=mail.get())
 
-sched.add_cron_job(send_email, day_of_week='fri', hour=7, minute=45)
+sched.add_cron_job(send_email, day_of_week='fri', hour=19, minute=50)
