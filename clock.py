@@ -1,4 +1,4 @@
-from apscheduler.schedulers.blocking import BlockingScheduler
+from apscheduler.scheduler import Scheduler
 from twilio.rest import TwilioRestClient
 import sendgrid
 import os
