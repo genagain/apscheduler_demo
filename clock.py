@@ -16,7 +16,7 @@ def text_gen():
   message = client.messages.create(to="+13479860720", from_="+16172022165", body="Hello Gen!")
   print('This job is run every two minutes.')
 
-def send_email(recipient):
+def send_email():
   sg = sendgrid.SendGridAPIClient(apikey=os.environ.get('SENDGRID_API_KEY'))
   from_email = Email("ohta.g@husky.neu.edu")
   subject = "Weekly update"
@@ -26,4 +26,4 @@ def send_email(recipient):
   mail = Mail(from_email, subject, to_email, content)
   response = sg.client.mail.send.post(request_body=mail.get())
 
-sched.add_cron_job(send_email, day_of_week='fri', hour=19, minute=50)
+sched.add_cron_job(send_email, day_of_week='fri', hour=20)
