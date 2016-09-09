@@ -1,10 +1,10 @@
-from apscheduler.scheduler import Scheduler
+from apscheduler.schedulers.blocking import BlockingScheduler
 from twilio.rest import TwilioRestClient
 import sendgrid
 import os
 from sendgrid.helpers.mail import *
 
-sched = Scheduler()
+sched = BlockingScheduler()
 sched.start()
 
 def text_gen():
