@@ -5,7 +5,9 @@ import os
 from sendgrid.helpers.mail import *
 
 sched = BlockingScheduler()
+print("created blocking scheduler")
 sched.start()
+print("started blocking scheduler")
 
 def text_gen():
   
@@ -27,3 +29,4 @@ def send_email():
   response = sg.client.mail.send.post(request_body=mail.get())
 
 sched.add_cron_job(send_email, day_of_week=5, hour=1, minute=15)
+print("added cron job")
