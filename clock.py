@@ -4,14 +4,17 @@ import os
 from sendgrid.helpers.mail import *
 
 def send_email():
-  sg = sendgrid.SendGridAPIClient(apikey=os.environ.get('SENDGRID_API_KEY'))
-  from_email = Email("ohta.g@husky.neu.edu")
-  subject = "Weekly update"
-  # to_email = Email("j.kimani@northeastern.edu")
-  to_email = Email("ohta.g@husky.neu.edu")
-  content = Content("text/plain", "Hello, Email!")
-  mail = Mail(from_email, subject, to_email, content)
-  response = sg.client.mail.send.post(request_body=mail.get())
+  try:
+    sg = sendgrid.SendGridAPIClient(apikey=os.environ.get('SENDGRID_API_KEY'))
+    from_email = Email("ohta.g@husky.neu.edu")
+    subject = "Weekly update"
+    # to_email = Email("j.kimani@northeastern.edu")
+    to_email = Email("ohta.g@husky.neu.edu")
+    content = Content("text/plain", "Hello, Email!")
+    mail = Mail(from_email, subject, to_email, content)
+    response = sg.client.mail.send.post(request_body=mail.get())
+  except Exception as e:
+    return e
 
 try:
   sched = BackgroundScheduler()
