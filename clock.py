@@ -27,7 +27,7 @@ try:
   print("created background scheduler")
   sched.start()
   print("started background scheduler")
-  sched.add_cron_job(send_email, day_of_week=5, hour=1, minute=15)
+  sched.add_(send_email, 'cron', day_of_week=6, hour=18, minute=50)
   print("added cron job")
 except Exception as e:
   print e.message
