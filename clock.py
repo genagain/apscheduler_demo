@@ -25,10 +25,10 @@ def send_email():
 try:
   sched = BackgroundScheduler()
   print("created background scheduler")
-  sched.start()
-  print("started background scheduler")
   sched.add_job(send_email, 'cron', day_of_week=6, hour=18, minute=50)
   print("added cron job")
+  sched.start()
+  print("started background scheduler")
 except Exception as e:
   print e.message
 
