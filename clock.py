@@ -29,6 +29,6 @@ try:
   print("started blocking scheduler")
   sched.add_cron_job(send_email, day_of_week=5, hour=1, minute=15)
   print("added cron job")
-except:
-  print "Unexpected error:", sys.exc_info()[0]
+except Exception as e:
+  print e.message
 
