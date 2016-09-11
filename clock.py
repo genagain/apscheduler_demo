@@ -24,7 +24,7 @@ def send_email():
 try:
   sched = BackgroundScheduler()
   print("created background scheduler")
-  sched.add_job(send_email, 'cron', day_of_week=6, hour=19, minute=30)
+  sched.add_job(send_email, 'cron', day_of_week=6, hour=22, minute=20)
   print("added cron job")
   sched.start()
   print("started background scheduler")
