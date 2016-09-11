@@ -4,13 +4,7 @@ import sendgrid
 import os
 from sendgrid.helpers.mail import *
 
-sched = BlockingScheduler()
-print("created blocking scheduler")
-sched.start()
-print("started blocking scheduler")
-
 def text_gen():
-  
   account_sid = "AC6e652d5e6bea5c4e494f9c7cb06be1a2"
   auth_token = "0d05da068ddc52eb021c930c27995ef0"
   client = TwilioRestClient(account_sid, auth_token)
@@ -28,5 +22,13 @@ def send_email():
   mail = Mail(from_email, subject, to_email, content)
   response = sg.client.mail.send.post(request_body=mail.get())
 
-sched.add_cron_job(send_email, day_of_week=5, hour=1, minute=15)
-print("added cron job")
+try:
+  sched = BlockingScheduler()
+  print("created blocking scheduler")
+  sched.start()
+  print("started blocking scheduler")
+  sched.add_cron_job(send_email, day_of_week=5, hour=1, minute=15)
+  print("added cron job")
+except:
+  print "Unexpected error:", sys.exc_info()[0]
+
