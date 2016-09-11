@@ -1,4 +1,4 @@
-from apscheduler.schedulers.blocking import BlockingScheduler
+from apscheduler.schedulers.background import BackgroundScheduler
 from twilio.rest import TwilioRestClient
 import sendgrid
 import os
@@ -23,10 +23,10 @@ def send_email():
   response = sg.client.mail.send.post(request_body=mail.get())
 
 try:
-  sched = BlockingScheduler()
-  print("created blocking scheduler")
+  sched = BackgroundScheduler()
+  print("created background scheduler")
   sched.start()
-  print("started blocking scheduler")
+  print("started background scheduler")
   sched.add_cron_job(send_email, day_of_week=5, hour=1, minute=15)
   print("added cron job")
 except Exception as e:
