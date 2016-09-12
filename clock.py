@@ -1,4 +1,4 @@
-from apscheduler.schedulers.background import BackgroundScheduler
+from apscheduler.schedulers.blocking import BlockingScheduler
 import sendgrid
 import os
 from sendgrid.helpers.mail import *
@@ -22,7 +22,7 @@ def send_email():
     return e
 
 try:
-  sched = BackgroundScheduler()
+  sched = BlockingScheduler()
   print("created background scheduler")
   sched.start()
   print("started background scheduler")
