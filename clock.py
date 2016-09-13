@@ -5,7 +5,7 @@ from sendgrid.helpers.mail import *
 
 sched = BlockingScheduler()
 
-@sched.scheduled_job('cron', day_of_week='tue', hour=0)
+@sched.scheduled_job('cron', day_of_week='tue', hour=9)
 def scheduled_job():
   sg = sendgrid.SendGridAPIClient(apikey=os.environ.get('SENDGRID_API_KEY'))
   print("created send grid api client")
@@ -15,7 +15,17 @@ def scheduled_job():
   # to_email = Email("j.kimani@northeastern.edu")
   to_email = Email("ohta.g@husky.neu.edu")
   print("created to email")
-  content = Content("text/plain", "Hello, Email!")
+  email_content = """
+  Hi Professor Kimani,
+
+  Here is a link to the GoogleDoc about our capstone progress.
+
+  <a href="https://docs.google.com/document/d/1FR2Vqhe9YctfCxOrWRoOO2HKIJjEpJp-CmSBV190vwE/edit?usp=sharing"> Weekly Progress </a>
+
+  Best,
+  Gen
+  """
+  content = Content("text/plain", email_content)
   print("created content")
   mail = Mail(from_email, subject, to_email, content)
   print("created mail")
